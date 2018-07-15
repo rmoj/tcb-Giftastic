@@ -76,9 +76,21 @@ $(document).ready(function() {
       image.attr('data-still', stillSource);
       image.attr('data-animate', animateSource);
       image.attr('data-state', 'still');
+      image.on('click', srcSwap);
       gifWrapper.append(p);
       gifWrapper.append(image);
       $('#image-holder').append(gifWrapper);
+    }
+  }
+
+  function srcSwap() {
+    var state = $(this).attr('data-state');
+    if (state === 'still') {
+      $(this).attr('src', $(this).attr('data-animate'));
+      $(this).attr('data-state', 'animate');
+    } else {
+      $(this).attr('src', $(this).attr('data-still'));
+      $(this).attr('data-state', 'still');
     }
   }
 
