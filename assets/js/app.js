@@ -1,21 +1,23 @@
 'use strict';
 
 $(document).ready(function() {
+  var counter = 0;
+
   $('#add').on('click', renderButton);
-  var i = 0;
 
   function renderButton() {
+    event.preventDefault();
     var btn = $('<button>');
-    btn.attr('id', i);
-    btn.text(i);
+    btn.attr('id', counter);
+    btn.text(counter);
     btn.on('click', dummyFunction);
     $('#button-holder').append(btn);
-    i++;
+    counter++;
   }
 
   function getJson() {
     var searchTerm = 'quokka';
-    var limit = 5;
+    var limit = 10;
     var rating = 'G';
     var apiKey = 'Xon9MP7X2uR0jVetMBZoD8fQeb5hPodw';
     var queryURL =
@@ -52,5 +54,6 @@ $(document).ready(function() {
     console.log('getJson');
     console.log(response);
   }
-  getJson();
+
+  // getJson();
 });
