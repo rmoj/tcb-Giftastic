@@ -14,26 +14,24 @@ $(document).ready(function() {
     'polar bear cub'
   ];
 
-  function createInitialButtons() {
-    for (var i = 0; i < topics.length; i++) {
-      renderButton(topics[i]);
-    }
-  }
-
-  function createNewButton() {
+  function addTopic() {
     event.preventDefault();
     var topic = $('#topic-input').val();
-    renderButton(topic);
+    topics.push(topic);
+    $('#button-holder').empty();
+    renderButtons();
   }
 
-  $('#add').on('click', createNewButton);
+  $('#add').on('click', addTopic);
 
-  function renderButton(searchTerm) {
-    var btn = $('<button>');
-    btn.attr('id', searchTerm);
-    btn.text(searchTerm);
-    btn.on('click', getJson);
-    $('#button-holder').append(btn);
+  function renderButtons() {
+    for (var i = 0; i < topics.length; i++) {
+      var btn = $('<button>');
+      btn.attr('id', topics[i]);
+      btn.text(topics[i]);
+      btn.on('click', getJson);
+      $('#button-holder').append(btn);
+    }
   }
 
   function getJson() {
@@ -63,15 +61,13 @@ $(document).ready(function() {
       });
   }
 
-  function renderGifs() {
-    // var gif = $('<img>');
-  }
-
   function parseJson(response) {
-    //
     console.log('response');
     console.log(response.data);
   }
 
-  createInitialButtons();
+  function renderGifs() {
+    $('#gif-holder').empty();
+  }
+  renderButtons();
 });
