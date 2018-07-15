@@ -1,18 +1,15 @@
 'use strict';
 
 $(document).ready(function() {
-  var counter = 0;
-
   $('#add').on('click', renderButton);
-
   function renderButton() {
     event.preventDefault();
+    var topic = $('#topic-input').val();
     var btn = $('<button>');
-    btn.attr('id', counter);
-    btn.text(counter);
+    btn.attr('id', topic);
+    btn.text(topic);
     btn.on('click', dummyFunction);
     $('#button-holder').append(btn);
-    counter++;
   }
 
   function getJson() {
