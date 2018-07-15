@@ -1,19 +1,24 @@
 'use strict';
 
 $(document).ready(function() {
+  var topic;
+
   $('#add').on('click', renderButton);
+
   function renderButton() {
     event.preventDefault();
-    var topic = $('#topic-input').val();
+    topic = $('#topic-input').val();
+
+    console.log('topic: ' + topic);
     var btn = $('<button>');
     btn.attr('id', topic);
     btn.text(topic);
-    btn.on('click', dummyFunction);
+    btn.on('click', getJson);
     $('#button-holder').append(btn);
   }
 
   function getJson() {
-    var searchTerm = 'quokka';
+    // var searchTerm = $('#topic-input').val();
     var limit = 10;
     var rating = 'G';
     var apiKey = 'Xon9MP7X2uR0jVetMBZoD8fQeb5hPodw';
@@ -21,7 +26,7 @@ $(document).ready(function() {
       'https://api.giphy.com/v1/gifs/search?api_key=' +
       apiKey +
       '&q=' +
-      searchTerm +
+      topic +
       '&limit=' +
       limit +
       '&offset=0&rating=' +
@@ -40,7 +45,7 @@ $(document).ready(function() {
   }
 
   function renderGifs() {
-    var gif = $('<img>');
+    // var gif = $('<img>');
   }
 
   function dummyFunction() {
@@ -48,7 +53,7 @@ $(document).ready(function() {
   }
 
   function parseJson(response) {
-    console.log('getJson');
+    console.log('response');
     console.log(response);
   }
 
