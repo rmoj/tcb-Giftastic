@@ -54,20 +54,33 @@ $(document).ready(function() {
       url: queryURL,
       method: 'GET'
     })
-      .then(parseJson)
       .then(renderGifs)
       .catch(function(error) {
         console.log(error);
       });
   }
 
-  function parseJson(response) {
-    console.log('response');
-    console.log(response.data);
+  function renderGifs(response) {
+    $('#image-holder').empty();
+
+    for (var i = 0; i < 10; i++) {
+      var stillSource = response.data[i].images.fixed_height_still.url;
+      var animateSource = response.data[i].images.fixed_height.url;
+      var rating = response.data[i].rating;
+      var gifWrapper = $('<div>');
+      gifWrapper.addClass('gifwrap');
+      var p = $('<p>');
+      p.text('Rating: ' + rating);
+      var image = $('<img>');
+      image.attr('src', stillSource);
+      image.attr('data-still', stillSource);
+      image.attr('data-animate', animateSource);
+      image.attr('data-state', 'still');
+      gifWrapper.append(p);
+      gifWrapper.append(image);
+      $('#image-holder').append(gifWrapper);
+    }
   }
 
-  function renderGifs() {
-    $('#gif-holder').empty();
-  }
   renderButtons();
 });
