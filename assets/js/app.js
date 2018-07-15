@@ -3,6 +3,7 @@
 $(document).ready(function() {
   $('#add').on('click', renderButton);
   var i = 0;
+
   function renderButton() {
     var btn = $('<button>');
     btn.attr('id', i);
@@ -16,24 +17,31 @@ $(document).ready(function() {
     var searchTerm = 'quokka';
     var limit = 5;
     var rating = 'G';
+    var apiKey = 'Xon9MP7X2uR0jVetMBZoD8fQeb5hPodw';
     var queryURL =
       'https://api.giphy.com/v1/gifs/search?api_key=' +
       apiKey +
       '&q=' +
       searchTerm +
-      '&limit=10&offset=0&rating=' +
+      '&limit=' +
+      limit +
+      '&offset=0&rating=' +
       rating +
       '&lang=en';
-    var apiKey = 'Xon9MP7X2uR0jVetMBZoD8fQeb5hPodw';
 
     $.ajax({
       url: queryURL,
       method: 'GET'
     })
       .then(parseJson)
+      .then(renderGifs)
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  function renderGifs() {
+    var gif = $('<img>');
   }
 
   function dummyFunction() {
@@ -41,9 +49,8 @@ $(document).ready(function() {
   }
 
   function parseJson(response) {
+    console.log('getJson');
     console.log(response);
   }
-
-  var r = getJson();
-  console.log(r);
+  getJson();
 });
