@@ -1,24 +1,43 @@
 'use strict';
 
 $(document).ready(function() {
-  var topic;
+  var topics = [
+    'quokka',
+    'puppy',
+    'kitten',
+    'panda',
+    'hippo',
+    'dolphin',
+    'elephant',
+    'baby swan',
+    'duckling',
+    'polar bear cub'
+  ];
 
-  $('#add').on('click', renderButton);
+  function createInitialButtons() {
+    for (var i = 0; i < topics.length; i++) {
+      renderButton(topics[i]);
+    }
+  }
 
-  function renderButton() {
+  function createNewButton() {
     event.preventDefault();
-    topic = $('#topic-input').val();
+    var topic = $('#topic-input').val();
+    renderButton(topic);
+  }
 
-    console.log('topic: ' + topic);
+  $('#add').on('click', createNewButton);
+
+  function renderButton(searchTerm) {
     var btn = $('<button>');
-    btn.attr('id', topic);
-    btn.text(topic);
+    btn.attr('id', searchTerm);
+    btn.text(searchTerm);
     btn.on('click', getJson);
     $('#button-holder').append(btn);
   }
 
   function getJson() {
-    // var searchTerm = $('#topic-input').val();
+    var searchTerm = $(this).attr('id');
     var limit = 10;
     var rating = 'G';
     var apiKey = 'Xon9MP7X2uR0jVetMBZoD8fQeb5hPodw';
@@ -26,7 +45,7 @@ $(document).ready(function() {
       'https://api.giphy.com/v1/gifs/search?api_key=' +
       apiKey +
       '&q=' +
-      topic +
+      searchTerm +
       '&limit=' +
       limit +
       '&offset=0&rating=' +
@@ -48,14 +67,11 @@ $(document).ready(function() {
     // var gif = $('<img>');
   }
 
-  function dummyFunction() {
-    console.log($(this).attr('id'));
-  }
-
   function parseJson(response) {
+    //
     console.log('response');
-    console.log(response);
+    console.log(response.data);
   }
 
-  // getJson();
+  createInitialButtons();
 });
