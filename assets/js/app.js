@@ -9,24 +9,27 @@ $(document).ready(function() {
     'hippo',
     'dolphin',
     'elephant',
-    'baby swan',
+    'koala',
     'duckling',
     'polar bear cub'
   ];
 
+  $('#add').on('click', addTopic);
+
   function addTopic() {
     event.preventDefault();
     var topic = $('#topic-input').val();
-    topics.push(topic);
-    $('#button-holder').empty();
-    renderButtons();
+    if (topic != '') {
+      topics.push(topic);
+      $('#button-holder').empty();
+      renderButtons();
+    }
   }
-
-  $('#add').on('click', addTopic);
 
   function renderButtons() {
     for (var i = 0; i < topics.length; i++) {
       var btn = $('<button>');
+      btn.addClass('btn');
       btn.attr('id', topics[i]);
       btn.text(topics[i]);
       btn.on('click', getJson);
@@ -76,14 +79,14 @@ $(document).ready(function() {
       image.attr('data-still', stillSource);
       image.attr('data-animate', animateSource);
       image.attr('data-state', 'still');
-      image.on('click', srcSwap);
+      image.on('click', swapImgSrc);
       gifWrapper.append(p);
       gifWrapper.append(image);
       $('#image-holder').append(gifWrapper);
     }
   }
 
-  function srcSwap() {
+  function swapImgSrc() {
     var state = $(this).attr('data-state');
     if (state === 'still') {
       $(this).attr('src', $(this).attr('data-animate'));
