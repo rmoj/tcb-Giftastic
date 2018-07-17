@@ -4,11 +4,11 @@ $(document).ready(function() {
   var topics = [
     'quokka',
     'puppy',
-    'kitten',
+    'chipmunk',
     'panda',
     'hippo',
     'dolphin',
-    'elephant',
+    'piglet',
     'koala',
     'duckling',
     'polar bear cub'
