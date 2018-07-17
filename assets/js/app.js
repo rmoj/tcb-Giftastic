@@ -80,8 +80,8 @@ $(document).ready(function() {
       image.attr('data-animate', animateSource);
       image.attr('data-state', 'still');
       image.on('click', swapImgSrc);
-      gifWrapper.append(p);
       gifWrapper.append(image);
+      gifWrapper.append(p);
       $('#image-holder').append(gifWrapper);
     }
   }
